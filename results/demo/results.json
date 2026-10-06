@@ -1,0 +1,755 @@
+{
+  "demo": true,
+  "runAt": "2026-10-06T02:47:29.740Z",
+  "tickets": 40,
+  "summaries": [
+    {
+      "racer": "Jev",
+      "model": "demo (simulated)",
+      "accuracy": 0.975,
+      "medianMs": 29.238865999999916,
+      "p90Ms": 38.25829199999998,
+      "totalSeconds": 1.1349133229999995,
+      "costUSD": 0.00010080000000000001,
+      "costPer1kTickets": 0.0025200000000000005,
+      "errors": 0
+    },
+    {
+      "racer": "Claude",
+      "model": "demo (simulated)",
+      "accuracy": 0.95,
+      "medianMs": 287.5293429999997,
+      "p90Ms": 375.66434499999923,
+      "totalSeconds": 11.088761847999997,
+      "costUSD": 0.1056,
+      "costPer1kTickets": 2.64,
+      "errors": 0
+    }
+  ],
+  "laps": {
+    "Jev": [
+      {
+        "ticket": 1,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 37.285143000000005,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 2,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 38.27475199999998,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 3,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 30.525179000000094,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 4,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 16.387043999999946,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 5,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 36.30555100000004,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 6,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 21.298958000000084,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 7,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 17.28555099999994,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 8,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 27.425271000000066,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 9,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 35.28563699999995,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 10,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 31.2947190000001,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 11,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 24.242922999999905,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 12,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 21.239645999999993,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 13,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 18.209996000000046,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 14,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 19.29759100000001,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 15,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 28.25205900000003,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 16,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 30.234188000000017,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 17,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 36.20230600000002,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 18,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 16.249736999999982,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 19,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 23.216936000000032,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 20,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 25.24033099999997,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 21,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 26.2518859999999,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 22,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 34.26671099999999,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 23,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 39.319017999999915,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 24,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 35.24184300000002,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 25,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 26.3322619999999,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 26,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 39.33122100000014,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 27,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 32.377095000000054,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 28,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 30.270232999999962,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 29,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 35.266797,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 30,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 38.25829199999998,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 31,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 21.357901999999967,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 32,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 25.242989999999963,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 33,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 28.284187999999858,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 34,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 16.237892999999985,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 35,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 16.25689999999986,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 36,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 29.238865999999916,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 37,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 35.24802599999998,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 38,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 36.769702999999936,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 39,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 33.27801700000009,
+        "inputTokens": 60,
+        "outputTokens": 0
+      },
+      {
+        "ticket": 40,
+        "expected": "account",
+        "answer": "shipping",
+        "correct": false,
+        "ms": 22.329962000000023,
+        "inputTokens": 60,
+        "outputTokens": 0
+      }
+    ],
+    "Claude": [
+      {
+        "ticket": 1,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 357.6022720000001,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 2,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 375.6591189999999,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 3,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 219.54604000000018,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 4,
+        "expected": "billing",
+        "answer": "shipping",
+        "correct": false,
+        "ms": 172.44359200000008,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 5,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 287.5293429999997,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 6,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 314.55456600000025,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 7,
+        "expected": "billing",
+        "answer": "account",
+        "correct": false,
+        "ms": 193.46013500000026,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 8,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 302.6162199999999,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 9,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 257.56311600000026,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 10,
+        "expected": "billing",
+        "answer": "billing",
+        "correct": true,
+        "ms": 309.59988899999917,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 11,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 343.71865400000024,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 12,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 304.55705599999965,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 13,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 348.6119830000007,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 14,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 395.68231899999955,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 15,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 197.53190799999993,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 16,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 198.47267600000032,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 17,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 197.4720440000001,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 18,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 186.44738599999982,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 19,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 351.65506300000015,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 20,
+        "expected": "technical",
+        "answer": "technical",
+        "correct": true,
+        "ms": 271.5481180000006,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 21,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 213.50652699999955,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 22,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 272.4133610000008,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 23,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 312.5880590000006,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 24,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 386.78055200000017,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 25,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 380.6714949999987,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 26,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 255.5121390000004,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 27,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 210.4911170000014,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 28,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 313.59018300000025,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 29,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 375.66434499999923,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 30,
+        "expected": "shipping",
+        "answer": "shipping",
+        "correct": true,
+        "ms": 281.67245100000036,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 31,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 352.677169999999,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 32,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 170.4723009999998,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 33,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 178.48121299999912,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 34,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 182.45128399999885,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 35,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 180.4468969999998,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 36,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 319.6022979999998,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 37,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 321.70755199999985,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 38,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 274.55947600000036,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 39,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 302.68809599999986,
+        "inputTokens": 60,
+        "outputTokens": 120
+      },
+      {
+        "ticket": 40,
+        "expected": "account",
+        "answer": "account",
+        "correct": true,
+        "ms": 216.51383299999907,
+        "inputTokens": 60,
+        "outputTokens": 120
+      }
+    ]
+  }
+}

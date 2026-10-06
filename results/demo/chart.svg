@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="368" viewBox="0 0 720 368" role="img" aria-label="DEMO (simulated): Jev answered 9.8× faster">
+<style>
+  svg { --bg:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --axis:#c9c8c3; --s1:#2a78d6; --s2:#eb6834; }
+  @media (prefers-color-scheme: dark) {
+    svg { --bg:#1a1a19; --ink:#ffffff; --ink2:#c3c2b7; --axis:#4a4945; --s1:#3987e5; --s2:#d95926; }
+  }
+  text { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .headline { font-size: 22px; font-weight: 700; }
+  .sub { font-size: 12px; fill: var(--ink2); }
+  .title { font-size: 13px; font-weight: 600; fill: var(--ink2); }
+  .label { font-size: 13px; }
+  .value { font-size: 13px; font-variant-numeric: tabular-nums; }
+  .axis { stroke: var(--axis); stroke-width: 1; }
+  .s1 { fill: var(--s1); }
+  .s2 { fill: var(--s2); }
+</style>
+<rect width="100%" height="100%" rx="8" fill="var(--bg)"/>
+<g transform="translate(20 0)">
+<text class="headline" x="0" y="34">DEMO (simulated): Jev answered 9.8× faster</text>
+<text class="sub" x="0" y="54">Same 40 support tickets, same categories, one at a time</text>
+<text class="title" x="0" y="86">Median time per answer (lower is better)</text>
+<g><title>Jev: 29 ms</title>
+<text class="label" x="80" y="113" text-anchor="end">Jev</text>
+<path class="s1" d="M90,98h44.81121186994809a4,4 0 0 1 4,4v14a4,4 0 0 1 -4,4h-44.81121186994809z"/>
+<text class="value" x="146.8112118699481" y="113">29 ms</text></g>
+<g><title>Claude: 288 ms</title>
+<text class="label" x="80" y="137" text-anchor="end">Claude</text>
+<path class="s2" d="M90,122h476a4,4 0 0 1 4,4v14a4,4 0 0 1 -4,4h-476z"/>
+<text class="value" x="578" y="137">288 ms</text></g>
+<line class="axis" x1="90" x2="90" y1="98" y2="144"/>
+<text class="title" x="0" y="180">Cost per 1,000 tickets (lower is better)</text>
+<g><title>Jev: $0.0025</title>
+<text class="label" x="80" y="207" text-anchor="end">Jev</text>
+<path class="s1" d="M90,192h1a1,1 0 0 1 1,1v20a1,1 0 0 1 -1,1h-1z"/>
+<text class="value" x="100" y="207">$0.0025</text></g>
+<g><title>Claude: $2.64</title>
+<text class="label" x="80" y="231" text-anchor="end">Claude</text>
+<path class="s2" d="M90,216h476a4,4 0 0 1 4,4v14a4,4 0 0 1 -4,4h-476z"/>
+<text class="value" x="578" y="231">$2.64</text></g>
+<line class="axis" x1="90" x2="90" y1="192" y2="238"/>
+<text class="title" x="0" y="274">Accuracy (higher is better)</text>
+<g><title>Jev: 98%</title>
+<text class="label" x="80" y="301" text-anchor="end">Jev</text>
+<path class="s1" d="M90,286h476a4,4 0 0 1 4,4v14a4,4 0 0 1 -4,4h-476z"/>
+<text class="value" x="578" y="301">98%</text></g>
+<g><title>Claude: 95%</title>
+<text class="label" x="80" y="325" text-anchor="end">Claude</text>
+<path class="s2" d="M90,310h463.6923076923077a4,4 0 0 1 4,4v14a4,4 0 0 1 -4,4h-463.6923076923077z"/>
+<text class="value" x="565.6923076923076" y="325">95%</text></g>
+<line class="axis" x1="90" x2="90" y1="286" y2="332"/>
+<text class="sub" x="0" y="352">Jev = demo (simulated)  ·  Claude = demo (simulated)</text>
+</g>
+</svg>

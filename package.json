@@ -1,0 +1,24 @@
+{
+  "name": "jev-speed-race",
+  "version": "1.0.0",
+  "description": "Race Jev (TypeSafe AI) against a frontier LLM on the same classification task.",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "race": "tsx src/race.ts",
+    "race:demo": "tsx src/race.ts --demo",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.131.0",
+    "@typesafe-ai/sdk": "0.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.4",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2"
+  }
+}
