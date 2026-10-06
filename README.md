@@ -7,6 +7,8 @@ You ask it a typed question, for example *"which of these 4 teams should get thi
 and it returns one of your labels with a probability for each.
 This project measures how much faster and cheaper that is than asking a chat model.
 
+> 🏎️ **Watch the race:** [stevenjb5m.github.io/Jev](https://stevenjb5m.github.io/Jev/), an animated replay with a scoreboard and every ticket.
+>
 > 📊 **Results:** see [`results/RESULTS.md`](results/RESULTS.md) after running the race.
 > A preview built with simulated data is in [`results/demo/`](results/demo/RESULTS.md).
 
@@ -48,6 +50,9 @@ npm run race
 
 You'll see each lap live (✅ right, ❌ wrong, 💥 error), then a summary table.
 
+The race also saves its data to `docs/data/`, so the website shows your latest real race.
+To view the site on your computer: `npx serve docs`, then open the link it prints.
+
 To race a different Claude model, set `CLAUDE_MODEL` (and update its price in `src/racers.ts`).
 
 ## Project layout
@@ -58,6 +63,7 @@ src/
   racers.ts    Jev, Claude and demo racers, all with the same shape
   race.ts      runs the race, scores it, saves results
   chart.ts     draws results/chart.svg
+docs/          the website (GitHub Pages serves this folder)
 results/       output from the real race
 results/demo/  output from the demo race (simulated)
 ```

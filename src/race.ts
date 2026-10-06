@@ -34,6 +34,8 @@ export interface Summary {
 
 const demo = process.argv.includes("--demo");
 const outDir = demo ? "results/demo" : "results";
+// The website in docs/ reads this file (GitHub Pages serves the docs/ folder).
+const siteData = demo ? "docs/data/demo.json" : "docs/data/results.json";
 
 try {
   process.loadEnvFile(); // loads keys from .env if the file exists
@@ -93,16 +95,16 @@ for (const racer of racers) {
 const summaries = racers.map((racer) => summarize(racer, laps[racer.name]!));
 
 await mkdir(outDir, { recursive: true });
+await mkdir("docs/data", { recursive: true });
 const runAt = new Date().toISOString();
-await writeFile(
-  `${outDir}/results.json`,
-  JSON.stringify({ demo, runAt, tickets: TICKETS.length, summaries, laps }, null, 2) + "\n",
-);
+const json = JSON.stringify({ demo, runAt, tickets: TICKETS, summaries, laps }, null, 2) + "\n";
+await writeFile(`${outDir}/results.json`, json);
+await writeFile(siteData, json);
 await writeFile(`${outDir}/RESULTS.md`, renderMarkdown(summaries, runAt));
 await writeFile(`${outDir}/chart.svg`, renderChart(summaries, demo));
 
 console.log("\n" + renderTable(summaries));
-console.log(`\nSaved ${outDir}/results.json, ${outDir}/RESULTS.md and ${outDir}/chart.svg`);
+console.log(`\nSaved ${outDir}/results.json, ${outDir}/RESULTS.md, ${outDir}/chart.svg and ${siteData}`);
 
 // ---------------------------------------------------------------------------
 

@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jev Speed Race</title>
+<meta name="description" content="Jev vs. Claude: 40 support tickets, one question, who answers faster?">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a motorsport timing screen. Start lights, two lanes, a timing tower, then the photo finish. */
+:root {
+  --bg: #eef1f4;          /* pit-lane concrete */
+  --surface: #ffffff;
+  --ink: #10151b;
+  --ink-2: #4d5662;
+  --line: #d3d9e0;
+  --track: #dde2e8;
+  --jev: #2a78d6;
+  --claude: #eb6834;
+  --good: #1a8f4c;
+  --bad: #d23b3b;
+  --lamp: #e0262b;
+  --lamp-off: #c4cbd3;
+  --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1316; --surface: #181d22; --ink: #f2f4f6; --ink-2: #a2abb5; --line: #2a3138;
+    --track: #222930; --jev: #3987e5; --claude: #d95926; --good: #3fbf74; --bad: #ef5d5d;
+    --lamp: #ff3b30; --lamp-off: #2c333b; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1316; --surface: #181d22; --ink: #f2f4f6; --ink-2: #a2abb5; --line: #2a3138;
+  --track: #222930; --jev: #3987e5; --claude: #d95926; --good: #3fbf74; --bad: #ef5d5d;
+  --lamp: #ff3b30; --lamp-off: #2c333b; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 16px/1.55 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1040px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 64px; display: grid; gap: 56px; }
+h1, h2 { font-family: var(--display); font-weight: 900; text-transform: uppercase; letter-spacing: 0.01em; line-height: 0.92; margin: 0; text-wrap: balance; }
+h2 { font-size: clamp(30px, 5vw, 44px); }
+.eyebrow { font: 500 12px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+section { display: grid; gap: 20px; min-width: 0; }
+section > header { display: grid; gap: 10px; }
+section > header p { margin: 0; color: var(--ink-2); max-width: 62ch; }
+
+/* ---------- Hero ---------- */
+.hero { display: grid; gap: 22px; }
+.hero-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+.brand { font: 500 13px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+.flag { width: 22px; height: 16px; border-radius: 2px;
+  background: repeating-conic-gradient(var(--ink) 0 25%, var(--surface) 0 50%) 0 0 / 8px 8px; border: 1px solid var(--line); }
+.badge { font: 600 12px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 10px; border-radius: 4px;
+  color: var(--bad); border: 1.5px solid var(--bad); }
+h1 { font-size: clamp(54px, 11vw, 124px); }
+h1 .vs { font-size: 0.42em; color: var(--ink-2); vertical-align: 0.6em; margin-inline: 0.12em; }
+h1 .jev { color: var(--jev); }
+h1 .claude { color: var(--claude); }
+.lede { margin: 0; font-size: clamp(17px, 2.2vw, 20px); max-width: 52ch; color: var(--ink-2); }
+.lede strong { color: var(--ink); font-weight: 600; }
+
+/* ---------- Race ---------- */
+.race { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: grid; gap: 20px; }
+.race-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+.lights { display: flex; gap: 8px; align-items: center; }
+.lamp { width: 22px; height: 22px; border-radius: 50%; background: var(--lamp-off); transition: background 0.08s, box-shadow 0.08s; }
+.lamp.on { background: var(--lamp); box-shadow: 0 0 14px var(--lamp); }
+.status { font: 500 13px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); min-width: 9ch; }
+.controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+button {
+  font: 600 14px/1 var(--body); letter-spacing: 0.04em; text-transform: uppercase;
+  background: var(--ink); color: var(--bg); border: 0; border-radius: 6px; padding: 11px 16px; cursor: pointer;
+}
+button.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+button:focus-visible, .toggle input:focus-visible + span { outline: 3px solid var(--jev); outline-offset: 2px; }
+.clock { font: 500 13px/1 var(--mono); color: var(--ink-2); }
+.clock b { font-weight: 500; color: var(--ink); font-size: 20px; }
+
+.lanes { display: grid; gap: 18px; }
+.lane { display: grid; gap: 10px; --c: var(--jev); }
+.lane[data-racer="1"] { --c: var(--claude); }
+.lane-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.lane-name { font: 900 26px/1 var(--display); text-transform: uppercase; color: var(--c); display: flex; gap: 10px; align-items: baseline; }
+.lane-name small { font: 400 12px/1 var(--mono); color: var(--ink-2); text-transform: none; letter-spacing: 0; }
+.lane-time { font: 500 14px/1 var(--mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.lane-time b { color: var(--ink); font-weight: 500; font-size: 18px; }
+.pos { display: inline-block; font: 600 12px/1 var(--mono); padding: 4px 6px; border-radius: 3px; background: var(--c); color: #fff; margin-left: 6px; vertical-align: 2px; }
+.track { position: relative; height: 44px; border-radius: 6px; background: var(--track); overflow: hidden; }
+.track::after { /* finish line */
+  content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 12px;
+  background: repeating-conic-gradient(var(--ink) 0 25%, var(--surface) 0 50%) 0 0 / 12px 12px; opacity: 0.85; }
+.ticks { position: absolute; inset: 0 12px 0 0; display: grid; grid-template-columns: repeat(40, 1fr); pointer-events: none; }
+.ticks i { border-right: 1px solid var(--bg); opacity: 0.7; }
+.trail { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--c); opacity: 0.18; }
+.car { position: absolute; top: 6px; left: 0; height: 32px; padding-inline: 12px; border-radius: 4px 16px 16px 4px;
+  background: var(--c); color: #fff; font: 900 16px/32px var(--display); text-transform: uppercase; letter-spacing: 0.04em;
+  transform: translateX(0); white-space: nowrap; will-change: transform; }
+.grid40 { display: grid; grid-template-columns: repeat(40, 1fr); gap: 2px; }
+.grid40 i { height: 10px; border-radius: 2px; background: var(--track); transition: background 0.15s; }
+.grid40 i.ok { background: var(--good); }
+.grid40 i.no { background: var(--bad); }
+.ticker { font: 400 13px/1.4 var(--mono); color: var(--ink-2); min-height: 1.4em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ticker .ok { color: var(--good); }
+.ticker .no { color: var(--bad); }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font: 400 12px/1 var(--mono); color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+/* ---------- Results ---------- */
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.stat { border-top: 3px solid var(--ink); padding-top: 12px; display: grid; gap: 4px; align-content: start; }
+.stat .big { font: 900 clamp(48px, 8vw, 84px)/0.9 var(--display); }
+.stat .label { font-weight: 600; }
+.stat .sub { font: 400 13px/1.4 var(--mono); color: var(--ink-2); }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 11px/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tower td:first-child { font: 900 22px/1 var(--display); }
+.who { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+.who i { width: 4px; height: 18px; border-radius: 2px; background: var(--c, var(--jev)); }
+.best { color: var(--good); font-weight: 500; }
+
+.photo td.text { min-width: 260px; }
+.pick { display: inline-flex; gap: 6px; align-items: baseline; white-space: nowrap; font-family: var(--mono); font-size: 13px; }
+.pick .mark { font-weight: 600; }
+.pick.ok .mark { color: var(--good); }
+.pick.no .mark { color: var(--bad); }
+.pick .ms { color: var(--ink-2); }
+.tag { font: 500 12px/1 var(--mono); padding: 4px 7px; border-radius: 3px; border: 1px solid var(--line); white-space: nowrap; }
+.toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.toggle { display: inline-flex; gap: 10px; align-items: center; cursor: pointer; font-weight: 500; }
+.toggle input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.toggle span { width: 38px; height: 22px; border-radius: 11px; background: var(--line); position: relative; transition: background 0.15s; }
+.toggle span::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--surface); transition: transform 0.15s; }
+.toggle input:checked + span { background: var(--ink); }
+.toggle input:checked + span::after { transform: translateX(16px); }
+.count { font: 400 13px/1 var(--mono); color: var(--ink-2); }
+
+/* ---------- How it works ---------- */
+.flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; align-items: stretch; }
+.step { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: grid; gap: 4px; align-content: start; position: relative; }
+.step b { font: 900 20px/1 var(--display); text-transform: uppercase; }
+.step span { font-size: 14px; color: var(--ink-2); }
+.step code { font: 400 12px/1.4 var(--mono); color: var(--ink-2); }
+.step:not(:last-child)::after { content: "→"; position: absolute; right: -10px; top: 50%; transform: translate(50%, -50%); color: var(--ink-2); font-family: var(--mono); }
+.step.split { gap: 8px; }
+.step.split div { border-left: 3px solid var(--jev); padding-left: 8px; }
+.step.split div + div { border-color: var(--claude); }
+.code-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.code { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; min-width: 0; }
+.code h3 { margin: 0; padding: 10px 14px; font: 600 13px/1.2 var(--mono); border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 8px; }
+.code h3 i { font-style: normal; color: var(--ink-2); font-weight: 400; }
+.code pre { margin: 0; padding: 14px; overflow-x: auto; font: 400 12.5px/1.6 var(--mono); }
+.code .k { color: var(--jev); }
+.code.claude .k { color: var(--claude); }
+.code .c { color: var(--ink-2); }
+
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); padding-top: 20px; font: 400 13px/1.5 var(--mono); color: var(--ink-2); }
+footer a { color: var(--ink); }
+
+@media (max-width: 760px) {
+  .stats { grid-template-columns: 1fr; }
+  .flow { grid-template-columns: 1fr; }
+  .step:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -10px; transform: translate(50%, 50%); }
+  .code-pair { grid-template-columns: 1fr; }
+  .grid40 i { height: 8px; }
+  .race { padding: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lamp, .grid40 i, .toggle span, .toggle span::after { transition: none; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header class="hero">
+    <div class="hero-top">
+      <div class="brand"><span class="flag" aria-hidden="true"></span>Jev Speed Race</div>
+      <span class="badge" id="demo-badge" hidden>Demo data · simulated</span>
+    </div>
+    <h1><span class="jev">Jev</span><span class="vs">vs</span><span class="claude">Claude</span></h1>
+    <p class="lede" id="lede">
+      <strong>40 customer-support tickets.</strong> Each one goes to the right team: billing, technical, shipping or account.
+      Jev answers with a typed label. Claude is a chat model asked the same question. Who gets through the stack first?
+    </p>
+  </header>
+
+  <section aria-labelledby="race-h">
+    <h2 id="race-h" hidden>The race</h2>
+    <div class="race">
+      <div class="race-bar">
+        <div class="lights" role="img" aria-label="Start lights">
+          <span class="lamp"></span><span class="lamp"></span><span class="lamp"></span><span class="lamp"></span><span class="lamp"></span>
+          <span class="status" id="status">Ready</span>
+        </div>
+        <div class="controls">
+          <span class="clock">race clock <b class="num" id="clock">0.00 s</b></span>
+          <button id="start">Start race</button>
+        </div>
+      </div>
+      <div class="lanes" id="lanes"></div>
+      <div class="legend">
+        <span><i style="background: var(--good)"></i>right team</span>
+        <span><i style="background: var(--bad)"></i>wrong team or error</span>
+        <span id="speed-note"></span>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="results-h">
+    <header>
+      <span class="eyebrow">Results</span>
+      <h2 id="results-h">The timing tower</h2>
+    </header>
+    <div class="stats" id="stats"></div>
+    <div class="table-wrap">
+      <table class="tower">
+        <thead><tr><th>Pos</th><th>Racer</th><th>Accuracy</th><th>Median</th><th>p90</th><th>Total</th><th>Cost / 1,000 tickets</th></tr></thead>
+        <tbody id="tower"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="photo-h">
+    <header>
+      <span class="eyebrow">Ticket by ticket</span>
+      <h2 id="photo-h">Photo finish</h2>
+      <p>Every ticket, the right answer, and what each racer said. Some tickets are tricky on purpose: a blank payment page is a technical problem, not billing.</p>
+    </header>
+    <div class="toolbar">
+      <label class="toggle" for="only-diff"><input type="checkbox" id="only-diff"><span aria-hidden="true"></span>Only show tickets someone got wrong</label>
+      <span class="count" id="photo-count"></span>
+    </div>
+    <div class="table-wrap">
+      <table class="photo">
+        <thead><tr><th>#</th><th>Ticket</th><th>Right team</th><th id="h0">Jev</th><th id="h1">Claude</th></tr></thead>
+        <tbody id="photo"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="how-h">
+    <header>
+      <span class="eyebrow">Under the hood</span>
+      <h2 id="how-h">How the race works</h2>
+      <p>Both racers get the same tickets, the same four teams and the same descriptions. Calls run one at a time so we measure how long a single answer takes, and each racer gets one untimed warm-up call.</p>
+    </header>
+    <div class="flow">
+      <div class="step"><b>Tickets</b><span>40 messages with the right answer</span><code>tickets.ts</code></div>
+      <div class="step"><b>Race runner</b><span>Starts a timer, sends one ticket</span><code>race.ts</code></div>
+      <div class="step split"><b>Racers</b>
+        <div><span>Jev answers a typed question</span></div>
+        <div><span>Claude fills a JSON schema</span></div>
+      </div>
+      <div class="step"><b>Score</b><span>Right or wrong, time, tokens, cost</span><code>race.ts</code></div>
+      <div class="step"><b>Results</b><span>This page, a chart and a table</span><code>results.json</code></div>
+    </div>
+    <div class="code-pair">
+      <div class="code"><h3>Jev <i>@typesafe-ai/sdk</i></h3>
+<pre><span class="c">// Ask a typed question, get a label back</span>
+<span class="k">await</span> client.systemOne({
+  state: ticket.text,
+  questions: {
+    team: choice(<span class="c">"Which team…?"</span>, {
+      billing, technical, shipping, account,
+    }),
+  },
+});
+<span class="c">// → { choice: "billing", confidence: 0.97 }</span></pre>
+      </div>
+      <div class="code claude"><h3>Claude <i>@anthropic-ai/sdk</i></h3>
+<pre><span class="c">// Prompt it, and force one of four labels</span>
+<span class="k">await</span> client.beta.messages.create({
+  model: <span class="c">"claude-opus-5-5"</span>,
+  system: <span class="c">"Which team…? billing: …"</span>,
+  messages: [{ role: <span class="c">"user"</span>, content: ticket.text }],
+  output_config: {
+    effort: <span class="c">"low"</span>,
+    format: { type: <span class="c">"json_schema"</span>, schema },
+  },
+});
+<span class="c">// → {"team": "billing"}</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span id="run-info"></span>
+    <span>Code on <a href="https://github.com/stevenjb5M/Jev">GitHub</a></span>
+  </footer>
+</main>
+
+<script type="module">
+const data = window.RACE_DATA ?? (await load());
+const racers = data.summaries.map((s) => s.racer);
+const tickets = data.tickets;
+const N = tickets.length;
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+async function load() {
+  for (const file of ["data/results.json", "data/demo.json"]) {
+    try {
+      const res = await fetch(file, { cache: "no-store" });
+      if (res.ok) return await res.json();
+    } catch {}
+  }
+  throw new Error("No race data found in docs/data/");
+}
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+const fmtS = (ms) => `${(ms / 1000).toFixed(2)} s`;
+const fmtMs = (ms) => `${Math.round(ms).toLocaleString()} ms`;
+const fmtX = (x) => (x >= 100 ? Math.round(x).toLocaleString() : x.toFixed(1)) + "×";
+const fmtUsd = (n) => (n === 0 ? "$0" : n >= 1 ? `$${n.toFixed(2)}` : `$${n.toPrecision(2)}`);
+
+// ---------- Static content (complete before any animation) ----------
+if (data.demo) {
+  $("demo-badge").hidden = false;
+}
+$("run-info").textContent = `${data.demo ? "Simulated demo run" : "Race run"} · ${data.runAt.slice(0, 10)} · ${racers.map((r, i) => `${r} = ${data.summaries[i].model}`).join(" · ")}`;
+racers.forEach((r, i) => ($(`h${i}`).textContent = r));
+
+const [a, b] = data.summaries;
+const sorted = [...data.summaries].sort((x, y) => x.totalSeconds - y.totalSeconds);
+$("stats").innerHTML = [
+  { big: fmtX(b.medianMs / a.medianMs), label: `faster per answer`, sub: `${a.racer} ${fmtMs(a.medianMs)} vs ${b.racer} ${fmtMs(b.medianMs)} median` },
+  { big: a.costPer1kTickets > 0 ? fmtX(b.costPer1kTickets / a.costPer1kTickets) : "—", label: `cheaper`, sub: `${fmtUsd(a.costPer1kTickets)} vs ${fmtUsd(b.costPer1kTickets)} per 1,000 tickets` },
+  { big: `${Math.round(a.accuracy * 100)}<span style="font-size:.5em;color:var(--ink-2)"> vs </span>${Math.round(b.accuracy * 100)}%`, label: `routed to the right team`, sub: `${a.racer} vs ${b.racer}, out of ${N} tickets` },
+].map((s) => `<div class="stat"><div class="big num">${s.big}</div><div class="label">${s.label}</div><div class="sub">${esc(s.sub)}</div></div>`).join("");
+
+const best = (key, lowIsGood = true) => Math[lowIsGood ? "min" : "max"](...data.summaries.map((s) => s[key]));
+const cell = (s, key, text, low = true) => `<td class="n${s[key] === best(key, low) ? " best" : ""}">${text}</td>`;
+$("tower").innerHTML = sorted.map((s, i) => {
+  const c = racers.indexOf(s.racer) === 0 ? "var(--jev)" : "var(--claude)";
+  return `<tr><td>P${i + 1}</td>
+    <td><span class="who" style="--c:${c}"><i></i>${esc(s.racer)}</span><br><span class="count">${esc(s.model)}</span></td>
+    ${cell(s, "accuracy", `${Math.round(s.accuracy * 100)}%`, false)}
+    ${cell(s, "medianMs", fmtMs(s.medianMs))}
+    ${cell(s, "p90Ms", fmtMs(s.p90Ms))}
+    ${cell(s, "totalSeconds", `${s.totalSeconds.toFixed(1)} s`)}
+    ${cell(s, "costPer1kTickets", fmtUsd(s.costPer1kTickets))}</tr>`;
+}).join("");
+
+function renderPhoto() {
+  const onlyDiff = $("only-diff").checked;
+  const rows = tickets.filter((t, i) => !onlyDiff || racers.some((r) => !data.laps[r][i].correct));
+  const pick = (lap) => `<span class="pick ${lap.correct ? "ok" : "no"}"><span class="mark">${lap.correct ? "✓" : "✗"}</span>${esc(lap.answer ?? "error")} <span class="ms">${fmtMs(lap.ms)}</span></span>`;
+  $("photo").innerHTML = rows.map((t) => {
+    const i = tickets.indexOf(t);
+    return `<tr><td class="n">${t.id}</td><td class="text">${esc(t.text)}</td><td><span class="tag">${t.answer}</span></td>${racers.map((r) => `<td>${pick(data.laps[r][i])}</td>`).join("")}</tr>`;
+  }).join("") || `<tr><td colspan="5">Both racers got every ticket right.</td></tr>`;
+  $("photo-count").textContent = `${rows.length} of ${N} tickets`;
+}
+$("only-diff").addEventListener("change", renderPhoto);
+renderPhoto();
+
+// ---------- The lanes ----------
+const lanes = racers.map((r, i) => {
+  const laps = data.laps[r];
+  const ends = [];
+  laps.reduce((sum, lap) => (ends.push(sum + lap.ms), sum + lap.ms), 0);
+  const el = document.createElement("div");
+  el.className = "lane";
+  el.dataset.racer = i;
+  el.innerHTML = `
+    <div class="lane-head">
+      <div class="lane-name">${esc(r)} <small>${esc(data.summaries[i].model)}</small></div>
+      <div class="lane-time"><b class="num">0.00 s</b> <span class="done"></span></div>
+    </div>
+    <div class="track"><div class="ticks">${"<i></i>".repeat(N)}</div><div class="trail"></div><div class="car">${esc(r)}</div></div>
+    <div class="grid40">${"<i></i>".repeat(N)}</div>
+    <div class="ticker">Waiting at the start line</div>`;
+  el.querySelectorAll(".ticks, .grid40").forEach((g) => (g.style.gridTemplateColumns = `repeat(${N}, 1fr)`));
+  $("lanes").append(el);
+  return { racer: r, laps, ends, total: ends.at(-1), el, shown: 0,
+    car: el.querySelector(".car"), trail: el.querySelector(".trail"), track: el.querySelector(".track"),
+    cells: [...el.querySelectorAll(".grid40 i")], time: el.querySelector(".lane-time b"),
+    done: el.querySelector(".done"), ticker: el.querySelector(".ticker") };
+});
+
+// Replay so the slower racer takes about 12 seconds. Same scale for both lanes.
+const slowest = Math.max(...lanes.map((l) => l.total));
+const speed = Math.max(1, slowest / 12000);
+$("speed-note").textContent = speed > 1.05 ? `replay at ${speed.toFixed(1)}× speed, same scale for both lanes` : "replay in real time";
+
+function draw(clockMs) {
+  $("clock").textContent = fmtS(Math.min(clockMs, slowest));
+  const finishOrder = [...lanes].sort((x, y) => x.total - y.total);
+  for (const lane of lanes) {
+    let done = lane.ends.findIndex((end) => end > clockMs);
+    if (done === -1) done = N;
+    const start = done > 0 ? lane.ends[done - 1] : 0;
+    const frac = done < N ? (clockMs - start) / lane.laps[done].ms : 0;
+    const progress = Math.min(1, (done + frac) / N);
+    const room = lane.track.clientWidth - lane.car.offsetWidth - 12;
+    lane.car.style.transform = `translateX(${progress * room}px)`;
+    lane.trail.style.width = `${progress * 100}%`;
+    lane.time.textContent = fmtS(Math.min(clockMs, lane.total));
+    for (let i = lane.shown; i < done; i++) lane.cells[i].className = lane.laps[i].correct ? "ok" : "no";
+    for (let i = done; i < lane.shown; i++) lane.cells[i].className = "";
+    if (done !== lane.shown) {
+      const last = lane.laps[done - 1];
+      lane.ticker.innerHTML = done === 0 ? "Waiting at the start line" :
+        `#${tickets[done - 1].id} → <span class="${last.correct ? "ok" : "no"}">${esc(last.answer ?? "error")} ${last.correct ? "✓" : "✗"}</span> in ${fmtMs(last.ms)} · “${esc(tickets[done - 1].text)}”`;
+      lane.shown = done;
+    }
+    lane.done.innerHTML = done === N ? `<span class="pos">P${finishOrder.indexOf(lane) + 1}</span>` : `<span class="num">${done}/${N}</span>`;
+  }
+}
+
+// ---------- Start lights + animation ----------
+const lamps = [...document.querySelectorAll(".lamp")];
+let raf = 0;
+let timers = [];
+
+function reset() {
+  cancelAnimationFrame(raf);
+  timers.forEach(clearTimeout);
+  timers = [];
+  lamps.forEach((l) => l.classList.remove("on"));
+  for (const lane of lanes) { lane.shown = N; }
+  draw(0);
+}
+
+function startRace() {
+  reset();
+  $("start").textContent = "Restart";
+  $("status").textContent = "Lights";
+  lamps.forEach((lamp, i) => timers.push(setTimeout(() => lamp.classList.add("on"), 450 * (i + 1))));
+  timers.push(setTimeout(() => {
+    lamps.forEach((l) => l.classList.remove("on"));
+    $("status").textContent = "Go";
+    const t0 = performance.now();
+    const tick = (now) => {
+      const clock = (now - t0) * speed;
+      draw(clock);
+      if (clock < slowest) raf = requestAnimationFrame(tick);
+      else $("status").textContent = "Finished";
+    };
+    raf = requestAnimationFrame(tick);
+  }, 450 * 5 + 700));
+}
+
+$("start").addEventListener("click", startRace);
+addEventListener("resize", () => { if ($("status").textContent === "Finished") draw(slowest); });
+
+if (reduceMotion) {
+  draw(slowest);
+  $("status").textContent = "Finished";
+  $("start").textContent = "Replay";
+} else {
+  draw(0);
+  setTimeout(startRace, 600);
+}
+</script>
+</body>
+</html>
